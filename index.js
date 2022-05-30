@@ -51,11 +51,16 @@ async function run() {
       const result = await ordersCollection.insertOne(order);
       res.send(result);
     });
-    app.get("/order", async (req, res) => {
+    app.get("/order", verifyJWT, async (req, res) => {
       const email = req.query.email;
-      const query = { email: email };
-      const orders = await ordersCollection.find(query).toArray();
-      res.send(orders);
+      const decoded = req.decoded.email;
+      if (email === decoded) {
+        const query = { email: email };
+        const orders = await ordersCollection.find(query).toArray();
+        return res.send(orders);
+      } else {
+        return res.status(403).send({ message: "Forbidden access" });
+      }
     });
 
     app.put("/user/:email", async (req, res) => {
