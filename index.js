@@ -5,7 +5,7 @@ const port = process.env.PORT || 5000;
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-app.use(cors({origin: "https://computer-galore.web.app/signup"}));
+app.use(cors({ origin: "https://computer-galore.web.app" }));
 app.use(express.json());
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
@@ -77,7 +77,7 @@ async function run() {
       const result = await ordersCollection.find(query).toArray();
       res.send(result);
     });
-    app.patch("/manageorder/:id", async (req, res) => {
+    app.patch("/manageorder/:id", verifyJWT, async (req, res) => {
       const id = req.params.id;
       const delivered = req.body;
       const filter = { _id: ObjectId(id) };
