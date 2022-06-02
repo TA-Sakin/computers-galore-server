@@ -77,7 +77,7 @@ async function run() {
       const result = await ordersCollection.find(query).toArray();
       res.send(result);
     });
-    app.patch("/order/:id", async (req, res) => {
+    app.patch("/manageorder/:id", async (req, res) => {
       const id = req.params.id;
       const delivered = req.body;
       const filter = { _id: ObjectId(id) };
@@ -136,7 +136,6 @@ async function run() {
     });
     app.post("/tools", verifyJWT, async (req, res) => {
       const tool = req.body;
-      console.log(tool);
       const result = await toolsCollection.insertOne(tool);
       res.send(result);
     });
