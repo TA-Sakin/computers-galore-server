@@ -8,9 +8,9 @@ require("dotenv").config();
 // const corsConfig = {
 //   origin: "https://computer-galore.web.app"
 // };
-app.use(cors({ origin: "https://computer-galore.web.app" }));
 // app.options('*',corsConfig)
-// app.use(cors());
+app.use(cors({ origin: "https://computer-galore.web.app" }));
+app.use(cors());
 app.use(express.json());
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
