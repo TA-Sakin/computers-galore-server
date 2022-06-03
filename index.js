@@ -6,8 +6,7 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const corsConfig = {
-  origin: "https://computer-galore.web.app",
-  credentials: true,
+  origin: "https://computer-galore.web.app"
 };
 app.use(cors(corsConfig));
 // app.options('*',corsConfig)
