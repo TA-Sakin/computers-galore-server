@@ -6,10 +6,11 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const corsConfig = {
-  orging: "https://computer-galore.web.app",
+  origin: "https://computer-galore.web.app",
   credentials: true,
 };
 app.use(cors(corsConfig));
+// app.options('*',corsConfig)
 // app.use(cors());
 app.use(express.json());
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
