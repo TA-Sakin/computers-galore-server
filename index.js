@@ -9,8 +9,8 @@ require("dotenv").config();
 //   origin: "https://computer-galore.web.app"
 // };
 // app.options('*',corsConfig)
-// app.use(cors());
-app.use(cors({ origin: "https://computer-galore.web.app" }));
+app.use(cors());
+// app.use(cors({ origin: "https://computer-galore.web.app" }));
 app.use(express.json());
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
@@ -48,7 +48,7 @@ async function run() {
       .collection("reviews");
 
     app.post("/create-payment-intent", verifyJWT, async (req, res) => {
-      const { total } = req.body;
+      const total  = req.body;
       const amount = total * 100;
       if (amount) {
         const paymentIntent = await stripe.paymentIntents.create({
